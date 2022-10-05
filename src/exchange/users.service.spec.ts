@@ -26,11 +26,14 @@ const currentRate = {
     rate: 19581.80795865621
 }
 
-describe('UserService', () => {
+describe('ExchangeService', () => {
     let service: ExchangeService;
     let repository: Repository<BtcUsdtHistory>;
+    const OLD_ENV = process.env;
 
     beforeEach(async () => {
+        jest.resetModules() // Most important - it clears the cache
+        process.env = { ...OLD_ENV }; // Make a copy
         const module: TestingModule = await Test.createTestingModule({
             providers: [
                 ExchangeService,
@@ -43,9 +46,12 @@ describe('UserService', () => {
                 },
             ],
         }).compile();
-
         service = module.get<ExchangeService>(ExchangeService);
         repository = module.get<Repository<BtcUsdtHistory>>(getRepositoryToken(BtcUsdtHistory));
+    });
+
+    afterAll(() => {
+        process.env = OLD_ENV; // Restore old environment
     });
 
     describe('btcUsdtRateHistory()', () => {
@@ -62,9 +68,7 @@ describe('UserService', () => {
                 service.btcUsdtRateStore(),
             ).resolves.toEqual(currentRate);
         });
-    });
 
-    describe('btcUsdtRateStore()', () => {
         it('should return an error', () => {
             service.currentRate = jest.fn().mockReturnValue({
                 rate: ''
