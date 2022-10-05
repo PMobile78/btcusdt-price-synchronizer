@@ -7,7 +7,6 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {ExchangeModule} from './exchange/exchange.module';
 import {ScheduleModule} from '@nestjs/schedule';
 import {TasksModule} from './exchange/tasks/tasks.module';
-import {BtcUsdtHistory} from "./exchange/entities/history.entity";
 
 @Module({
     imports: [
@@ -20,7 +19,7 @@ import {BtcUsdtHistory} from "./exchange/entities/history.entity";
                 password: process.env.DB_PASSWORD,
                 database: process.env.DB_NAME,
                 autoLoadEntities: true,
-                synchronize: Boolean(process.env.DB_SYNCHRONIZE)
+                synchronize: false
             })
         }),
         ScheduleModule.forRoot(),
