@@ -1,0 +1,27 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type currentRateResponse {
+  rate: String!
+}
+
+type btcUsdtRateHistoryResponse {
+  history: [btcUsdtRateHistory!]!
+  count: Float!
+}
+
+type btcUsdtRateHistory {
+  id: ID!
+  rate: Float!
+  date: String!
+}
+
+type Query {
+  currentRate(symbolFirst: String!, symbolSecond: String!): currentRateResponse!
+  btcUsdtRateHistory(skip: Int = 0, take: Int = 25): btcUsdtRateHistoryResponse!
+}
+
+type Mutation {
+  btcUsdtRateStore: btcUsdtRateHistory!
+}
