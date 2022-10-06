@@ -35,7 +35,6 @@ export class ExchangeService {
                         resolve(JSON.parse(chunks.toString()).rate);
                     });
                 });
-                request.end();
                 request.on('error', (err) => {
                     reject(err);
                 });
