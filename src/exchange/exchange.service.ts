@@ -1,9 +1,9 @@
 import {Injectable, Logger} from '@nestjs/common';
 import {currentRateArgs, btcUsdtRateHistoryArgs} from './dto/exchange.args';
-import {btcUsdtRateHistoryResponse, currentRateResponse, btcUsdtRateHistory} from "./models/exchange.model";
-import {BtcUsdtHistory} from "./entities/history.entity";
-import {InjectRepository} from "@nestjs/typeorm";
-import {Repository} from "typeorm";
+import {btcUsdtRateHistoryResponse, currentRateResponse, btcUsdtRateHistory} from './models/exchange.model';
+import {BtcUsdtHistory} from './entities/history.entity';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
 
 const https = require('https');
 
@@ -19,10 +19,10 @@ export class ExchangeService {
 
     async currentRate(data: currentRateArgs): Promise<currentRateResponse> {
         let options = {
-            "method": "GET",
-            "hostname": "rest.coinapi.io",
-            "path": `/v1/exchangerate/${data.symbolFirst}/${data.symbolSecond}`,
-            "headers": {'X-CoinAPI-Key': process.env.API_KEY}
+            'method': 'GET',
+            'hostname': 'rest.coinapi.io',
+            'path': `/v1/exchangerate/${data.symbolFirst}/${data.symbolSecond}`,
+            'headers': {'X-CoinAPI-Key': process.env.API_KEY}
         };
         try {
             let rate: string | undefined = await new Promise((resolve, reject) => {
@@ -62,7 +62,7 @@ export class ExchangeService {
     }
 
     async btcUsdtRateStore(): Promise<btcUsdtRateHistory> {
-        let result = await this.currentRate({symbolFirst: "BTC", symbolSecond: "USDT"});
+        let result = await this.currentRate({symbolFirst: 'BTC', symbolSecond: 'USDT'});
         if (!result.rate) {
             throw Error('Something wrong during getting a rate.')
         }

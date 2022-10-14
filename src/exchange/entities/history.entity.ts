@@ -5,9 +5,9 @@ export class BtcUsdtHistory {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: "float"})
+    @Column({type: 'float'})
     rate;
 
-    @Column({type: "int"})
+    @Column({type: 'int'})
     date;
 }

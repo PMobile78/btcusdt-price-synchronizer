@@ -1,5 +1,5 @@
 import {Args, Mutation, Query, Resolver} from '@nestjs/graphql';
-import {currentRateArgs, btcUsdtRateHistoryArgs} from "./dto/exchange.args";
+import {currentRateArgs, btcUsdtRateHistoryArgs} from './dto/exchange.args';
 import {currentRateResponse, btcUsdtRateHistoryResponse, btcUsdtRateHistory} from './models/exchange.model';
 import {ExchangeService} from './exchange.service';
 

@@ -83,7 +83,7 @@ describe('ExchangeService', () => {
         it('should return an empty rate because of wrong API_KEY', () => {
             process.env.API_KEY = '123';
             expect(
-                service.currentRate({symbolFirst: "BTC", symbolSecond: "USDT"}),
+                service.currentRate({symbolFirst: 'BTC', symbolSecond: 'USDT'}),
             ).resolves.toEqual({
                 rate: ''
             });
