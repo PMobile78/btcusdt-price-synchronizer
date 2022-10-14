@@ -68,15 +68,6 @@ describe('ExchangeService', () => {
                 service.btcUsdtRateStore(),
             ).resolves.toEqual(currentRate);
         });
-
-        it('should return an error', () => {
-            service.currentRate = jest.fn().mockReturnValue({
-                rate: ''
-            })
-            expect(
-                service.btcUsdtRateStore(),
-            ).rejects.toThrow('Something wrong during getting a rate.');
-        });
     });
 
     describe('currentRate()', () => {
@@ -84,9 +75,7 @@ describe('ExchangeService', () => {
             process.env.API_KEY = '123';
             expect(
                 service.currentRate({symbolFirst: 'BTC', symbolSecond: 'USDT'}),
-            ).resolves.toEqual({
-                rate: ''
-            });
+            ).rejects.toThrow('Something wrong during getting a rate.')
         });
     });
 

@@ -32,7 +32,12 @@ export class ExchangeService {
                         chunks.push(chunk);
                     });
                     response.on('end', () => {
-                        resolve(JSON.parse(chunks.toString()).rate);
+                        let result = JSON.parse(chunks.toString());
+                        if (result.error) {
+                            reject(result.error)
+                        } else {
+                            resolve(result.rate);
+                        }
                     });
                 });
                 request.on('error', (err) => {
@@ -40,13 +45,12 @@ export class ExchangeService {
                 });
                 request.end();
             });
-            let result = rate ? rate : '';
             return {
-                rate: result
+                rate: rate
             };
         } catch (error) {
             this.logger.error(error);
-            throw Error(error);
+            throw Error('Something wrong during getting a rate.');
         }
     }
 
@@ -63,9 +67,6 @@ export class ExchangeService {
 
     async btcUsdtRateStore(): Promise<btcUsdtRateHistory> {
         let result = await this.currentRate({symbolFirst: 'BTC', symbolSecond: 'USDT'});
-        if (!result.rate) {
-            throw Error('Something wrong during getting a rate.')
-        }
         const btcUsdt = new BtcUsdtHistory();
         btcUsdt.rate = result.rate;
         btcUsdt.date = Math.floor(Date.now() / 1000);

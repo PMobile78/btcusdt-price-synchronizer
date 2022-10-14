@@ -11,14 +11,14 @@ export class ExchangeResolver {
     @Query(() => currentRateResponse)
     async currentRate(
         @Args() data: currentRateArgs,
-    ): Promise<currentRateResponse | Error> {
+    ): Promise<currentRateResponse> {
         return await this.exchangeService.currentRate(data);
     }
 
     @Query(() => btcUsdtRateHistoryResponse)
     async btcUsdtRateHistory(
         @Args() data: btcUsdtRateHistoryArgs,
-    ): Promise<btcUsdtRateHistoryResponse | Error> {
+    ): Promise<btcUsdtRateHistoryResponse> {
         return await this.exchangeService.btcUsdtRateHistory(data);
     }
 
