@@ -3,7 +3,7 @@ import {Field, ObjectType, Int, ID} from '@nestjs/graphql';
 @ObjectType()
 export class currentRateResponse {
     @Field()
-    rate!: string;
+    rate!: number;
 }
 
 @ObjectType()

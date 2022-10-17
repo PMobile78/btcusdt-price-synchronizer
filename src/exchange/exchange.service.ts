@@ -25,7 +25,7 @@ export class ExchangeService {
             'headers': {'X-CoinAPI-Key': process.env.API_KEY}
         };
         try {
-            let rate: string | undefined = await new Promise((resolve, reject) => {
+            let rate: number | undefined = await new Promise((resolve, reject) => {
                 let request = https.request(options, function (response) {
                     let chunks = [];
                     response.on('data', function (chunk) {

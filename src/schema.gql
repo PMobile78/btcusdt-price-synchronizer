@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type currentRateResponse {
-  rate: String!
+  rate: Float!
 }
 
 type btcUsdtRateHistoryResponse {
